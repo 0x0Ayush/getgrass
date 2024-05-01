@@ -62,6 +62,10 @@ async def connect_to_wss(socks5_proxy, user_id):
                 logger.info(f"Removing error proxy from the list: {socks5_proxy}")
                 remove_proxy_from_list(socks5_proxy)
                 return None  # Return None to signal to the main loop to replace this proxy
+            elif "" in str(e):
+                logger.info(f"Removing error proxy from the list: {socks5_proxy}")
+                remove_proxy_from_list(socks5_proxy)
+                return None  # Return None to signal to the main loop to replace this 
             elif "Empty connect reply" in str(e) or "Device creation limit exceeded" in str(e):
                 logger.info(f"Removing error proxy from the list: {socks5_proxy}")
                 remove_proxy_from_list(socks5_proxy)
